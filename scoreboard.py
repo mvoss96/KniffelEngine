@@ -1,13 +1,13 @@
 import copy
 from challenges import *
 
+
 def check_list_valid(input: list[int]):
     if len(input) != 5:
-            raise ValueError("input must have length 5")
+        raise ValueError("input must have length 5")
     for i in input:
         if i < 1 or i > 6:
             raise ValueError("input must only have values between 1 - 6")
-
 
 
 class Scoreboard:
@@ -21,13 +21,14 @@ class Scoreboard:
         self.lower_challenges: list[Challenge] = [
             Ch_n_of_a_kind(3),
             Ch_n_of_a_kind(4),
+            Ch_full_house(),
             Ch_n_of_a_kind(5),
         ]
 
     def get_upper(self) -> list[Challenge]:
         return copy.deepcopy(self.upper_challenges)
 
-    def get_lower(self)-> list[Challenge]:
+    def get_lower(self) -> list[Challenge]:
         return copy.deepcopy(self.lower_challenges)
 
     def apply_upper(self, input: list[int], ch: int) -> int:
