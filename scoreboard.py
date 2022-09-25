@@ -16,15 +16,15 @@ class Scoreboard:
     def __init__(self) -> None:
         points_for_upper_bonus: int = 63
         self.upper_challenges: list[Challenge] = [
-            Ch_only_number(i) for i in range(1, 7)
+            ch_only_number(i) for i in range(1, 7)
         ]
         self.lower_challenges: list[Challenge] = [
-            Ch_n_of_a_kind(3),
-            Ch_n_of_a_kind(4),
-            Ch_full_house(),
-            Ch_small_street(),
-            Ch_big_street(),
-            Ch_n_of_a_kind(5),
+            ch_n_of_a_kind(3),
+            ch_n_of_a_kind(4),
+            ch_full_house(),
+            ch_small_street(),
+            ch_big_street(),
+            ch_n_of_a_kind(5),
         ]
 
     def get_upper(self) -> list[Challenge]:

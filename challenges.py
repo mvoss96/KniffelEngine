@@ -34,7 +34,7 @@ class Challenge:
         return self.name
 
 
-class Ch_only_number(Challenge):
+class ch_only_number(Challenge):
     """Challenge: Collect a specific number"""
 
     NAMESLIST: list[str] = ["Einser", "Zweier", "Dreier", "Vierer", "Fünfer", "Sechser"]
@@ -57,7 +57,7 @@ class Ch_only_number(Challenge):
         return tmp
 
 
-class Ch_n_of_a_kind(Challenge):
+class ch_n_of_a_kind(Challenge):
     """Challenge: Collect n of the same number"""
 
     NAMESLIST: list[str] = [
@@ -76,17 +76,23 @@ class Ch_n_of_a_kind(Challenge):
         self.collect_n = collect_n
 
     def get_max_points(self) -> int:
-        return self.collect_n * 6
+        if self.collect_n == 5:
+            return 50
+        else:
+            return self.collect_n * 6
 
     def calc_points(self, input: list[int]) -> int:
         val: int = 0
         for i in range(1, 7):
             if input.count(i) >= self.collect_n and i > val:
                 val = i
-        return val * self.collect_n
+        if self.collect_n == 5 and val != 0:
+            return self.get_max_points()
+        else:
+            return val * self.collect_n
 
 
-class Ch_full_house(Challenge):
+class ch_full_house(Challenge):
     """Challenge: Collect 3 of one number and 2 of another number"""
 
     def __init__(self) -> None:
@@ -104,7 +110,7 @@ class Ch_full_house(Challenge):
         return self.get_max_points()
 
 
-class Ch_small_street(Challenge):
+class ch_small_street(Challenge):
     """Challenge: Collect 4 consecutive numbers"""
 
     accepted_inputs = (set([1, 2, 3, 4]), set([2, 3, 4, 5]), set([3, 4, 5, 6]))
@@ -123,10 +129,10 @@ class Ch_small_street(Challenge):
         return 0
 
 
-class Ch_big_street(Challenge):
+class ch_big_street(Challenge):
     """Challenge: Collect 5 consecutive numbers"""
 
-    accepted_inputs = ([1, 2, 3, 4, 5], [2, 3, 4, 5])
+    accepted_inputs = ([1, 2, 3, 4, 5], [2, 3, 4, 5, 6])
 
     def __init__(self) -> None:
         super().__init__()

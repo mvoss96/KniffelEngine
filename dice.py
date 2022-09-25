@@ -17,7 +17,7 @@ class Dice:
         """
         out = []
         sides = 6
-        for i in range(num_of_dice):
+        for _ in range(num_of_dice):
             # random int from 1 -> sides (inclusive)
             random_number: int = random.randint(1, sides)
             out.append(random_number)
