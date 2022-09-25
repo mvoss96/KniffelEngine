@@ -22,6 +22,8 @@ class Scoreboard:
             Ch_n_of_a_kind(3),
             Ch_n_of_a_kind(4),
             Ch_full_house(),
+            Ch_small_street(),
+            Ch_big_street(),
             Ch_n_of_a_kind(5),
         ]
 

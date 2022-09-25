@@ -9,7 +9,7 @@ class Challenge:
 
     def __str__(self) -> str:
         return (
-            f"Challenge:{self.name:<11} completed:{str(self.completed):<5}"
+            f"Challenge:{self.name:<13} completed:{str(self.completed):<5}"
             f" points:{self.points:<2} maxPoints:{self.get_max_points():<2} values:{str(self.values):<15}"
         )
 
@@ -97,7 +97,6 @@ class Ch_full_house(Challenge):
         return 25
 
     def calc_points(self, input: list[int]) -> int:
-        input.sort()
         if input[0] != input[1] or input[3] != input[4]:
             return 0
         if input[2] != input[1] and input[2] != input[3]:
@@ -108,6 +107,8 @@ class Ch_full_house(Challenge):
 class Ch_small_street(Challenge):
     """Challenge: Collect 4 consecutive numbers"""
 
+    accepted_inputs = (set([1, 2, 3, 4]), set([2, 3, 4, 5]), set([3, 4, 5, 6]))
+
     def __init__(self) -> None:
         super().__init__()
         self.name = "Kleine Straße"
@@ -116,16 +117,16 @@ class Ch_small_street(Challenge):
         return 30
 
     def calc_points(self, input: list[int]) -> int:
-        input.sort()
-        if input[1] != 2 or input[2] != 3 or input[3] != 4 or input[4] != 5:
-            return 0
-        if input[0] != 1 and input[5] != 6:
-            return 0
-        return self.get_max_points()
+        for tst in self.accepted_inputs:
+            if tst <= set(input):  # if list is sublist of input
+                return self.get_max_points()
+        return 0
 
 
 class Ch_big_street(Challenge):
     """Challenge: Collect 5 consecutive numbers"""
+
+    accepted_inputs = ([1, 2, 3, 4, 5], [2, 3, 4, 5])
 
     def __init__(self) -> None:
         super().__init__()
@@ -135,8 +136,7 @@ class Ch_big_street(Challenge):
         return 40
 
     def calc_points(self, input: list[int]) -> int:
-        input.sort()
-        if input[2] != 3 or input[3] != 4 :
+        if input in self.accepted_inputs:
+            return self.get_max_points()
+        else:
             return 0
-        
-        return self.get_max_points()

@@ -6,5 +6,5 @@ board = Scoreboard()
 
 roll = dice.roll(5)
 print(roll)
-print(board.apply_lower([1,2,1,2,2], 2))
+print(board.apply_lower([2,4,3,4,5], 3))
 for i in board.get_lower(): print(i)
