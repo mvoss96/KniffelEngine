@@ -4,17 +4,18 @@ class Challenge:
     def __init__(self) -> None:
         self.name = "Platzhalter"
         self.completed: bool = False
-        self.points: int = 0
-        self.values = []
+        # self.points: int = 0
+        # self.values = []
 
     def __str__(self) -> str:
-        return (
-            f"Challenge:{self.name:<13} completed:{str(self.completed):<5}"
-            f" points:{self.points:<2} maxPoints:{self.get_max_points():<2} values:{str(self.values):<15}"
-        )
+        return f"Challenge:{self.name:<13} completed:{str(self.completed):<5} maxPoints:{self.get_max_points():<2}"
+        # return (
+        #     f"Challenge:{self.name:<13} completed:{str(self.completed):<5}"
+        #     f" points:{self.points:<2} maxPoints:{self.get_max_points():<2} values:{str(self.values):<15}"
+        # )
 
-    def get_points(self) -> int:
-        return self.points
+    # def get_points(self) -> int:
+    #     return self.points
 
     def calc_points(self, input: list[int]) -> int:
         raise NotImplementedError
@@ -22,13 +23,13 @@ class Challenge:
     def get_max_points(self) -> int:
         raise NotImplementedError
 
-    def set_result(self, input: list[int]) -> int:
-        input.sort()
-        self.points = 0
-        self.completed = True
-        self.points = self.calc_points(input)
-        self.values = input
-        return self.points
+    # def set_result(self, input: list[int]) -> int:
+    #     input.sort()
+    #     self.points = 0
+    #     self.completed = True
+    #     self.points = self.calc_points(input)
+    #     self.values = input
+    #     return self.points
 
     def get_name(self) -> str:
         return self.name
@@ -103,6 +104,7 @@ class ch_full_house(Challenge):
         return 25
 
     def calc_points(self, input: list[int]) -> int:
+        input.sort()
         if input[0] != input[1] or input[3] != input[4]:
             return 0
         if input[2] != input[1] and input[2] != input[3]:
@@ -123,6 +125,7 @@ class ch_small_street(Challenge):
         return 30
 
     def calc_points(self, input: list[int]) -> int:
+        input.sort()
         for tst in self.accepted_inputs:
             if tst <= set(input):  # if list is sublist of input
                 return self.get_max_points()
@@ -142,6 +145,7 @@ class ch_big_street(Challenge):
         return 40
 
     def calc_points(self, input: list[int]) -> int:
+        input.sort()
         if input in self.accepted_inputs:
             return self.get_max_points()
         else:

@@ -8,7 +8,7 @@ class TestChallenges(unittest.TestCase):
             ch = challenges.ch_only_number(i)
             for n in range(0, 6):
                 test_input = [i] * n + [i + 1 if i < 6 else i - 1] * (5 - n)
-                points = ch.set_result(test_input)
+                points = ch.calc_points(test_input)
                 self.assertEqual(
                     points, n * i, msg=f"case:{ch.get_name()} test input:{test_input}"
                 )
@@ -17,18 +17,18 @@ class TestChallenges(unittest.TestCase):
         non_valid_input = [1, 2, 3, 4, 5]
         for i in range(2, 6):
             ch = challenges.ch_n_of_a_kind(i)
-            points = ch.set_result(non_valid_input)
+            points = ch.calc_points(non_valid_input)
             self.assertEqual(
                 points, 0, msg=f"case:{ch.get_name()} test input:{non_valid_input}"
             )
         ch = challenges.ch_n_of_a_kind(2)
-        self.assertEqual(ch.set_result([1, 2, 3, 4, 4]), 4 * 2)  # Zweierpasch
+        self.assertEqual(ch.calc_points([1, 2, 3, 4, 4]), 4 * 2)  # Zweierpasch
         ch = challenges.ch_n_of_a_kind(3)
-        self.assertEqual(ch.set_result([1, 2, 3, 3, 3]), 3 * 3)  # Dreierpasch
+        self.assertEqual(ch.calc_points([1, 2, 3, 3, 3]), 3 * 3)  # Dreierpasch
         ch = challenges.ch_n_of_a_kind(4)
-        self.assertEqual(ch.set_result([1, 2, 2, 2, 2]), 2 * 4)  # Viererpasch
+        self.assertEqual(ch.calc_points([1, 2, 2, 2, 2]), 2 * 4)  # Viererpasch
         ch = challenges.ch_n_of_a_kind(5)
-        self.assertEqual(ch.set_result([1, 1, 1, 1, 1]), 50)  # Kniffel
+        self.assertEqual(ch.calc_points([1, 1, 1, 1, 1]), 50)  # Kniffel
 
     def test_full_house(self):
         non_valid_inputs = (
@@ -46,10 +46,10 @@ class TestChallenges(unittest.TestCase):
         )
         ch = challenges.ch_full_house()
         for i in non_valid_inputs:  # test non valid
-            points = ch.set_result(i)
+            points = ch.calc_points(i)
             self.assertEqual(points, 0, msg=f"case:{ch.get_name()} test input:{i}")
         for i in valid_inputs:  # test valid
-            points = ch.set_result(i)
+            points = ch.calc_points(i)
             self.assertEqual(points, 25, msg=f"case:{ch.get_name()} test input:{i}")
 
     def test_small_street(self):
@@ -68,10 +68,10 @@ class TestChallenges(unittest.TestCase):
         )
         ch = challenges.ch_small_street()
         for i in non_valid_inputs:  # test non valid
-            points = ch.set_result(i)
+            points = ch.calc_points(i)
             self.assertEqual(points, 0, msg=f"case:{ch.get_name()} test input:{i}")
         for i in valid_inputs:  # test valid
-            points = ch.set_result(i)
+            points = ch.calc_points(i)
             self.assertEqual(points, 30, msg=f"case:{ch.get_name()} test input:{i}")
 
     def test_big_street(self):
@@ -93,8 +93,8 @@ class TestChallenges(unittest.TestCase):
         )
         ch = challenges.ch_big_street()
         for i in non_valid_inputs:  # test non valid
-            points = ch.set_result(i)
+            points = ch.calc_points(i)
             self.assertEqual(points, 0, msg=f"case:{ch.get_name()} test input:{i}")
         for i in valid_inputs:  # test valid
-            points = ch.set_result(i)
+            points = ch.calc_points(i)
             self.assertEqual(points, 40, msg=f"case:{ch.get_name()} test input:{i}")
