@@ -14,13 +14,12 @@ class TestChallenges(unittest.TestCase):
                 )
 
     def test_n_of_a_kind(self):
-        non_valid_input = [1, 2, 3, 4, 5]
+        non_valid_inputs = ([1, 2, 3, 4, 5], [6, 5, 4, 3, 2])
         for i in range(2, 6):
             ch = challenges.ch_n_of_a_kind(i)
-            points = ch.calc_points(non_valid_input)
-            self.assertEqual(
-                points, 0, msg=f"case:{ch.get_name()} test input:{non_valid_input}"
-            )
+            for i in non_valid_inputs:
+                points = ch.calc_points(i)
+                self.assertEqual(points, 0, msg=f"case:{ch.get_name()} test input:{i}")
         ch = challenges.ch_n_of_a_kind(2)
         self.assertEqual(ch.calc_points([1, 2, 3, 4, 4]), 4 * 2)  # Zweierpasch
         ch = challenges.ch_n_of_a_kind(3)
